@@ -18,4 +18,13 @@ public class BoardVO {
     private String writer;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
+
+    // <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+    // mapUnderscoreToCamelCase ->  스네이크 케이스 == 카멜 케이스
+
+    // reg_date -> regDate
+    // update_date -> updateDate
+
+
 }

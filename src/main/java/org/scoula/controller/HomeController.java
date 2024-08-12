@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 
 public class HomeController {
+
     @GetMapping("/")
     public String home() {
-        log.info("================> HomController /");
-        return "index"; // View의 이름
+        // log.info("================> HomController /");
+        // return "index"; // View의 이름
+        return "redirect:/board/list";
     }
+
 }

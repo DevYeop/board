@@ -3,19 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.scoula.board.mapper.BoardMapper">
+    <update id="update">
+        update tbl_board
+        set title       = #{title},
+            content     = #{content},
+            writer      = #{writer},
+            update_date = now()
+        where no = #{no}
 
-    <select id="getList" resultType="org.scoula.board.domain.BoardVO">
+    </update>
+    <delete id="delete">
+        delete
+        from tbl_board
+        where no = #{no}
+    </delete>
+
+    <select id="getList" resultType="BoardVO">
         <![CDATA[
         SELECT *
         FROM tbl_board
-        where no < 3;
-        ]]>
-    </select>
-
-    <select id="getList2" resultType="BoardVO">
-    <![CDATA[
-        select *
-        from tbl_board
         ]]>
     </select>
 
