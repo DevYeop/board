@@ -6,14 +6,16 @@
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 글 수정</h1>
 <div>
     <form role="form" method="post">
+
         <input type="hidden" name="no" value="${board.no}">
+        <%--        <input name="no" value="${board.no}">--%>
         <div>
             <label>제목</label>
             <input name="title" class="form-control" value="${board.title}">
         </div>
         <div>
             <label>작성자</label>
-            <input name="writer" class="form-control" value="${board.writer}" disabled>
+            <input name="writer" class="form-control" value="${board.writer}">
         </div>
         <div>
             <label>내용</label>

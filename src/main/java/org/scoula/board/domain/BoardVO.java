@@ -1,6 +1,8 @@
 package org.scoula.board.domain;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +14,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BoardVO {
-    private Long no;
-    private String title;
-    private String content;
+    private Long no; //47
+    private String title; // 이미지 업로딩
+    private String content; //
     private String writer;
-    private LocalDateTime regDate;
-    private LocalDateTime updateDate;
+    private Date regDate;
+    private Date updateDate; //
+
+    private List<BoardAttachmentVO> attaches;
 
     // <setting name="mapUnderscoreToCamelCase" value="true"/>
 

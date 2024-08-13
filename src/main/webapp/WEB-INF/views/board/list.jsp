@@ -31,12 +31,10 @@
                 <a href="get?no=${board.no}">${board.title}</a>
             </td>
             <td>${board.writer}</td>
-            <td>${board.writerFirstname}</td>
-            <td>${board.writerLastname}</td>
             <td>
-                    <%--                                    <fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}"/>--%>
-                <fmt:parseDate value="${ board.regDate }" pattern="yyyy-MM-dd" var="parsedDateTime" type="both"/>
-                <fmt:formatDate pattern="yyyy-MM-dd" value="${ parsedDateTime }"/>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}"/>
+                    <%--                <fmt:parseDate value="${ board.regDate }" pattern="yyyy-MM-dd" var="parsedDateTime" type="both"/>--%>
+                    <%--                <fmt:formatDate pattern="yyyy-MM-dd" value="${ parsedDateTime }"/>--%>
 
             </td>
         </tr>
