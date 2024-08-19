@@ -1,89 +1,60 @@
 package org.scoula.board.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import org.scoula.board.domain.BoardAttachmentVO;
+import lombok.extern.slf4j.Slf4j;
 import org.scoula.board.dto.BoardDTO;
 import org.scoula.board.service.BoardService;
-import org.scoula.common.util.UploadFiles;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.List;
 
-@Controller
-@Log4j
-@RequestMapping("/board")
+@RestController
+@RequestMapping("/api/board")
 @RequiredArgsConstructor
+@Slf4j
 public class BoardController {
-    final private BoardService service;
+    private final BoardService service;
 
-    @GetMapping("/list")
-    public void list(Model model) { // request : /board/list
-        log.info("list");
+//    @GetMapping("")
+//    public List<BoardDTO> getList() {
+//        return service.getList();
+//    }
 
-        List<BoardDTO> boardDTOList = service.getList();
-        model.addAttribute("listData", boardDTOList);
-
-//        model.addAttribute("listData", service.getList());
-
-//        return "/board/list";
+    @GetMapping("")
+    public ResponseEntity<List<BoardDTO>> getList() {
+        return ResponseEntity.ok(service.getList());
     }
 
-    @GetMapping("/create") // board/create
-    public void create() {
-        log.info("create");
+    @GetMapping("/{no}")
+    public ResponseEntity<BoardDTO> get(@PathVariable Long no) {
+        return ResponseEntity.ok(service.get(no));
     }
 
-    @PostMapping("/create")
-    public String create(BoardDTO board, RedirectAttributes ra) {
-        service.create(board);
-        return "redirect:/board/list";
+    @PostMapping("")
+    public ResponseEntity<BoardDTO> create(@RequestBody BoardDTO board) {
+        return ResponseEntity.ok(service.create(board));
     }
 
-    @GetMapping({"/get", "/update"}) // board/get
-    public void get(@RequestParam("no") Long no, Model model) { // no=44
-        log.info("/get or update");
-
-        BoardDTO boardDTO = service.get(no); // board
-        model.addAttribute("board", boardDTO);
-
-        // return "board/get";
-
-        // 위의 2줄을 줄여서 쓴 코드
-//        model.addAttribute("board", service.get(no));
-
-//        return "board/update";
+    //    @PutMapping("/{id}")
+    @PutMapping("/{no}")
+//    public ResponseEntity<BoardDTO> update(@RequestBody BoardDTO board) {
+    public ResponseEntity<BoardDTO> update(@PathVariable Long no, @RequestBody BoardDTO board) {
+//        log.info("Updating board with id {}", id);
+//        board.setNo(id);
+        board.setNo(no);
+        return ResponseEntity.ok(service.update(board));
     }
 
-    @PostMapping("/update")
-    public String update(BoardDTO board, RedirectAttributes ra) {
-        service.update(board);
-//        if (service.update(board)) {
-//            ra.addFlashAttribute("result", "success");
-//        }
+    @DeleteMapping("/{no}")
+    // /api/board/44
+//    public ResponseEntity<BoardDTO> delete(@PathVariable int id) {
+    public ResponseEntity<BoardDTO> delete(@PathVariable Long no) {
+        int number = 1;
+        Long number2 = null;
+        // int Integer Long
 
-        return "redirect:/board/list";
+        return ResponseEntity.ok(service.delete(no));
     }
-
-    @PostMapping("/delete")
-    public String delete(@RequestParam("no") Long no) {
-        log.info("delete..." + no);
-        service.delete(no);
-        return "redirect:/board/list";
-    }
-
-
-    @GetMapping("/download/{no}")
-    @ResponseBody // view를 사용하지 않고, 직접 내보냄
-    public void download(@PathVariable("no") Long no, HttpServletResponse response) throws Exception {
-        BoardAttachmentVO attach = service.getAttachment(no);
-        File file = new File(attach.getPath());
-        UploadFiles.download(response, file, attach.getFilename());
-    }
-
 }

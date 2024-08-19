@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BoardVO {
-    private Long no; //47
+    private Long no; // 49
     private String title; // 이미지 업로딩
     private String content; //
     private String writer;

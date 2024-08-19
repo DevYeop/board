@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <nav class="navbar navbar-expand-md bg-primary navbar-dark sticky-top">
-    <a class="navbar-brand" href="#"><i class="fa-solid fa-house"></i> Backend</a>
+    <a class="navbar-brand" href="list"><i class="fa-solid fa-house"></i> Backend</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>

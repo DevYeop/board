@@ -6,5 +6,6 @@ public class UploadFileName {
         String name = filename.substring(0, ix); // 파일명 추출
         String ext = filename.substring(ix + 1); // 확장명 추출
         return String.format("%s-%d.%s", name, System.currentTimeMillis(), ext);
+        // abcd.jpg -> abcd-1241242939293.jpg
     }
 }

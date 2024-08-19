@@ -36,8 +36,11 @@ public class UploadFiles {
     public static void download(HttpServletResponse response, File file, String orgName) throws Exception {
         response.setContentType("application/download");
         response.setContentLength((int) file.length());
+
+
         String filename = URLEncoder.encode(orgName, "UTF-8"); // 한글 파일명인 경우 인코딩 필수
         response.setHeader("Content-disposition", "attachment;filename=\"" + filename + "\"");
+
         try (OutputStream os = response.getOutputStream();
              BufferedOutputStream bos = new BufferedOutputStream(os)) {
             Files.copy(Paths.get(file.getPath()), bos);
